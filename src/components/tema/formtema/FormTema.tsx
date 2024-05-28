@@ -4,6 +4,7 @@ import { AuthContext } from "../../../contexts/AuthContext";
 import Tema from "../../../models/Tema";
 import { atualizar, buscar, cadastrar } from "../../../services/Service";
 import { RotatingLines } from "react-loader-spinner";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function FormTema() {
 
@@ -30,7 +31,7 @@ function FormTema() {
 
     useEffect(() => {
         if (token === '') {
-            alert('Você precisa estar logado!')
+            ToastAlerta('Você precisa estar logado!', "info")
             navigate('/')
         }
     }, [token])
@@ -62,12 +63,12 @@ function FormTema() {
                 await atualizar(`/temas`, tema, setTema, {
                     headers: { 'Authorization': token }
                 });
-                alert('Tema atualizado com sucesso!');
+                ToastAlerta('Tema atualizado com sucesso!', "sucesso");
             } catch (error: any) {
                 if (error.toString().includes('401')) {
                     handleLogout()
                 } else {
-                    alert('Erro ao atualizar o Tema!')
+                    ToastAlerta('Erro ao atualizar o Tema!', "erro")
                 }
             }
 
@@ -77,12 +78,12 @@ function FormTema() {
                 await cadastrar(`/temas`, tema, setTema, {
                     headers: { 'Authorization': token }
                 });
-                alert('Tema cadastrado com sucesso!');
+                ToastAlerta('Tema cadastrado com sucesso!', "sucesso");
             } catch (error: any) {
                 if (error.toString().includes('401')) {
                     handleLogout()
                 } else {
-                    alert('Erro ao cadastrar o Tema!')
+                    ToastAlerta('Erro ao cadastrar o Tema!', "erro")
                 }
             }
 
@@ -115,7 +116,7 @@ function FormTema() {
                 </div>
                 <button
                     className="rounded text-slate-100 bg-[#06D6A0] 
-                               hover:bg-[#007F90] w-1/2 py-2 mx-auto flex justify-center"
+                                hover:bg-[#007F90] w-1/2 py-2 mx-auto flex justify-center"
                     type="submit">
 
                     {isLoading ? <RotatingLines

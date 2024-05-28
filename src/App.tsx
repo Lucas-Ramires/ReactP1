@@ -11,11 +11,15 @@ import DeletarTema from './components/tema/deletartema/DeletarTema'
 import DeletarPostagem from './components/postagem/deletarpostagem/DeletarPostagem'
 import FormPostagem from './components/postagem/formpostagem/FormPostagem'
 import ListaPostagens from './components/postagem/listapostagens/ListaPostagens'
+import { ToastContainer } from 'react-toastify'
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
     return (
         <>
             <AuthProvider>
+                <ToastContainer/>
                 <BrowserRouter>
                     <Navbar />
                     <div className='min-h-[80vh]'>
